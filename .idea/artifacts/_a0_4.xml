@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="音声文件夹重命名工具 a0.4">
+    <output-path>$PROJECT_DIR$/out/artifacts/_a0_4</output-path>
+    <root id="archive" name="音声文件夹重命名工具 a0.4.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="AutoGetRJdata" />
+    </root>
+  </artifact>
+</component>
