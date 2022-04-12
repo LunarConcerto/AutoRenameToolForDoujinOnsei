@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class AutoGetRJData {
 
-    public static final String VERSION = "a0.4";
+    public static final String VERSION = "a0.6";
 
     public static SettingFrame SETTING_WINDOW ;
     public static AppMainWindowFrame MAIN_WINDOW ;
@@ -29,7 +29,6 @@ public class AutoGetRJData {
             FileInputStream fileInputStream = new FileInputStream(file);
             properties.loadFromXML(fileInputStream);
             fileInputStream.close();
-
         }
         DataBase.setSETTING(properties);
     }

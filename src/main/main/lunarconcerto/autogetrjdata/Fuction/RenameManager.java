@@ -4,15 +4,61 @@ import main.lunarconcerto.autogetrjdata.GUI.UIConsolePanel;
 import main.lunarconcerto.autogetrjdata.Util.DataBase;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 public class RenameManager {
 
     public static boolean startRename(List<String> information , String path , JComboBox[] rule , JCheckBox checkBox) throws IOException {
+        Properties properties = DataBase.getSETTING();
+        String download_image = properties.getProperty("download_image");
+        if (download_image!=null && download_image.equals("true")) {
+            downloadCover(information , path , checkBox);
+        }
         return rename(information , path , rule , checkBox);
+    }
+
+    private static void downloadCover(List<String> information , String path , JCheckBox checkBox){
+        List<String> imgPath = new ArrayList<>() ;
+        for (int i = 5 ; i < information.size(); i++) {
+            imgPath.add(information.get(i));
+        }
+        int i = imgPath.size() ;
+        for (String s : imgPath) {
+            s = "https:"+s ;
+            String[] split = s.split("/");
+            String name = split[split.length-1];
+            int i1 = name.indexOf(".");
+            String substring = name.substring(i1);
+            try {
+                URL url = new URL(s);
+
+                URLConnection urlConnection = url.openConnection();
+
+                InputStream inputStream = urlConnection.getInputStream();
+
+                String pathName = checkBox.getText();
+
+                OutputStream outputStream = new FileOutputStream(path+"\\"+pathName+"\\IMG"+i+substring);
+
+                int num = 0 ;
+                while ((num = inputStream.read()) != -1){
+                    outputStream.write(num);
+                }
+
+                inputStream.close();
+                outputStream.close();
+
+                i-- ;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static boolean rename(List<String> information , String path  , JComboBox[] rule , JCheckBox checkBox) throws IOException {

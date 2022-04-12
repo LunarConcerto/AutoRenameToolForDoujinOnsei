@@ -59,15 +59,19 @@ public class StartButtonListener implements ActionListener {
                     UIConsolePanel.printMessage("已确认文件，开始进行处理！");
                     for (JCheckBox checkBox : needRenameFileList) {
                         checkBox.setSelected(false);
+
                         UIConsolePanel.printMessage("处理文件:" + checkBox.getText() + "...");
+
                         List<String> downloadResources = DownloadResources.startDownloadResources(checkBox.getText());
+
                         if (downloadResources != null) {
-                            boolean ACTION_RESULT = RenameManager.startRename(downloadResources, path, renameRuleList, checkBox);
+
+                            boolean ACTION_RESULT =
+                                    RenameManager.startRename(downloadResources , path , renameRuleList, checkBox);
+
                             if (ACTION_RESULT) {
                                 UIConsolePanel.printMessage("已完成" + checkBox.getText() + "的重命名工作");
                             }
-                        }else {
-                            continue;
                         }
                     }
                 }

@@ -17,17 +17,17 @@ import java.util.List;
 
 public class UIConsolePanel extends JPanel {
 
-    private static JPanel logPanel = new JPanel();
-    private static JLabel logLabel = new JLabel("运行日志");
+    private static final JPanel logPanel = new JPanel();
+    private static final JLabel logLabel = new JLabel("运行日志");
 
-    private static JPanel startPanel = new JPanel();
-    private static JButton startButton = new JButton("开始运行");
-    private static JButton settingButton = new JButton("设置");
+    private static final JPanel startPanel = new JPanel();
+    private static final JButton startButton = new JButton("开始运行");
+    private static final JButton settingButton = new JButton("设置");
 
-    private static DefaultListModel<String> consoleLogListModel = new DefaultListModel<>();
-    private JList<String> consoleLogList = new JList<String>(consoleLogListModel);
+    private static final DefaultListModel<String> consoleLogListModel = new DefaultListModel<>();
+    private final JList<String> consoleLogList = new JList<String>(consoleLogListModel);
 
-    private static List<String> messageList = new ArrayList<>();
+    private static final List<String> messageList = new ArrayList<>();
 
     public UIConsolePanel() {
         init();
@@ -74,7 +74,7 @@ public class UIConsolePanel extends JPanel {
         });
     }
 
-    public void saveLog() {
+    public static void saveLog() {
         String dir = Util.getUserDir() + "\\log\\";
         File contents = new File(dir);
         contents.mkdir();
